@@ -1,39 +1,59 @@
-import { Box, Button, FormLabel, Heading, HStack, Image, Input, Text, Textarea, useBreakpointValue, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormLabel,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Text,
+  Textarea,
+  useBreakpointValue,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import emailjs from "emailjs-com";
-
 
 function App() {
   const [complaintInfo, setComplaintInfo] = useState({
     title: "",
     lecturer: "",
     nature_of_complaint: "",
-    submittedAt: new Date().toLocaleString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  })
+  });
 
   const handleChange = (e) => {
-    setComplaintInfo({ ...complaintInfo, [e.target.name]: e.target.value })
-  }
+    setComplaintInfo({ ...complaintInfo, [e.target.name]: e.target.value });
+  };
 
-  const SERVICE_ID = "service_9nc5cgg"
-  const TEMPLATE_ID = "template_d0loof6"
-  const PUBLIC_KEY = "ocQ2cFR_6q4W2eKVv"
+  const SERVICE_ID = "service_9nc5cgg";
+  const TEMPLATE_ID = "template_d0loof6";
+  const PUBLIC_KEY = "ocQ2cFR_6q4W2eKVv";
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Basic manual validation
+    if (!complaintInfo.title.trim() || !complaintInfo.nature_of_complaint.trim()) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    const submittedAt = new Date().toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
     emailjs.send(
       SERVICE_ID,
       TEMPLATE_ID,
       {
         title: complaintInfo.title,
-        lecturer: complaintInfo.lecturer,
+        lecturer: complaintInfo.lecturer || "None",
         nature_of_complaint: complaintInfo.nature_of_complaint,
-        submittedAt: complaintInfo.submittedAt
+        submittedAt,
       },
       PUBLIC_KEY
     );
@@ -45,9 +65,10 @@ function App() {
     });
 
     alert("Your complaint has been emailed to the management.");
-  }
+  };
 
-  const formWidth = useBreakpointValue({ base: '100%', md: '500px' });
+  const formWidth = useBreakpointValue({ base: "100%", md: "500px" });
+
   return (
     <Box
       w="100%"
@@ -60,6 +81,7 @@ function App() {
     >
       <Box
         as="form"
+        onSubmit={handleSubmit}
         bg="white"
         boxShadow="2xl"
         borderRadius="xl"
@@ -83,11 +105,11 @@ function App() {
               <FormLabel>Title</FormLabel>
               <Input
                 variant="filled"
-                onChange={handleChange}
-                required
                 name="title"
                 value={complaintInfo.title}
+                onChange={handleChange}
                 placeholder="Course Registration Problems..."
+                required
               />
             </Box>
 
@@ -100,9 +122,9 @@ function App() {
               </HStack>
               <Input
                 variant="filled"
-                onChange={handleChange}
                 name="lecturer"
                 value={complaintInfo.lecturer}
+                onChange={handleChange}
                 placeholder="Dr. ...."
               />
             </Box>
@@ -111,22 +133,16 @@ function App() {
               <FormLabel>Nature of Complaint</FormLabel>
               <Textarea
                 variant="filled"
-                onChange={handleChange}
-                required
                 name="nature_of_complaint"
                 value={complaintInfo.nature_of_complaint}
+                onChange={handleChange}
                 placeholder="I have an issue ........"
+                required
               />
             </Box>
           </VStack>
 
-          <Button
-            variant="solid"
-            w="full"
-            colorScheme="red"
-            onClick={handleSubmit}
-            size="lg"
-          >
+          <Button type="submit" colorScheme="red" size="lg" w="full">
             Submit Complaint
           </Button>
         </VStack>
