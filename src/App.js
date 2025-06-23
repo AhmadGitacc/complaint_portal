@@ -21,7 +21,7 @@ function App() {
     setComplaintInfo({ ...complaintInfo, [e.target.name]: e.target.value })
   }
 
-  const SERVICE_ID = ""
+  const SERVICE_ID = "service_9nc5cgg"
   const TEMPLATE_ID = "template_ut93gxs"
   const PUBLIC_KEY = "ocQ2cFR_6q4W2eKVv"
 
