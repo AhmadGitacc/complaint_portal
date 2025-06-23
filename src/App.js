@@ -22,7 +22,7 @@ function App() {
   }
 
   const SERVICE_ID = "service_9nc5cgg"
-  const TEMPLATE_ID = "template_ut93gxs"
+  const TEMPLATE_ID = "template_d0loof6"
   const PUBLIC_KEY = "ocQ2cFR_6q4W2eKVv"
 
   const handleSubmit = () => {
