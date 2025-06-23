@@ -22,8 +22,8 @@ function App() {
   }
 
   const SERVICE_ID = ""
-  const TEMPLATE_ID = ""
-  const PUBLIC_KEY = ""
+  const TEMPLATE_ID = "template_ut93gxs"
+  const PUBLIC_KEY = "ocQ2cFR_6q4W2eKVv"
 
   const handleSubmit = () => {
     emailjs.send(
