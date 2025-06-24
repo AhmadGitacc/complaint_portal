@@ -93,11 +93,11 @@ function App() {
           <Image src="/Lincoln.png" alt="lcn logo" w="100%" maxW="350px" />
 
           <Heading size="lg" color="red.600" textAlign="center">
-            Student Complaints Portal
+            Student Feedback/Complaints Portal
           </Heading>
 
           <Text fontSize="sm" color="gray.600" textAlign="center">
-            Please complete the form below for your complaints.
+            Please complete the form below for your complaints or feedback.
           </Text>
 
           <VStack spacing={4} w="full">
@@ -130,7 +130,7 @@ function App() {
             </Box>
 
             <Box w="full">
-              <FormLabel>Nature of Complaint</FormLabel>
+              <FormLabel>Nature of Complaint/Feedback</FormLabel>
               <Textarea
                 variant="filled"
                 name="nature_of_complaint"
